@@ -163,6 +163,25 @@ if [ -e $cwd/swag/casks ]; then
 fi
 
 ###############################################################################
+# INSTALL: cask-fonts
+###############################################################################
+if [ -e $cwd/swag/fonts ]; then
+	chapter "Installing fonts via Homebrew…"
+
+	if ! brew tap | grep -q cask-fonts; then
+		echo_install "Installing cask-fonts"
+		brew tap homebrew/cask-fonts >/dev/null
+		print_in_green "${bold}✓ installed!${normal}\n"
+	else
+		print_success_muted "cask-fonts already installed. Skipped."
+	fi
+
+	for cask in $(<$cwd/swag/fonts); do
+	    install_application_via_brew $cask
+	done
+fi
+
+###############################################################################
 # INSTALL: Mac App Store Apps
 ###############################################################################
 chapter "Installing apps from App Store…"
@@ -193,7 +212,6 @@ fi
 ###############################################################################
 chapter "Cleaning up Homebrew files…"
 brew cleanup 2> /dev/null
-brew cask cleanup 2> /dev/null
 
 ###############################################################################
 # INSTALL: npm packages
@@ -208,6 +226,25 @@ if [ -e $cwd/swag/npm ]; then
 	done
 fi
 
+###############################################################################
+# OPTIONAL: MacOS Defaults
+###############################################################################
+chapter "Setting MacOS Defaults…"
+if ask "Warning: This step may modify your MacOS system defaults!" Y; then
+	. "$cwd/swag/macos"; print_in_green "\n  MacOS settings updated. You may need to restart.\n";
+else
+	print_success_muted "Skipped MacOS settings update.";
+fi
+
+###############################################################################
+# OPTIONAL: Dotfiles
+###############################################################################
+chapter "Updating Dotfiles…"
+if ask "Warning: This step may overwrite your existing dotfiles!" Y; then
+	symlink_dotfiles
+else
+	print_success_muted "Skipped dotfiles update.";
+fi
 
 ###############################################################################
 # OPTIONAL: Customizations

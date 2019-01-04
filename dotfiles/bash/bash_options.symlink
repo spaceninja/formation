@@ -1,0 +1,23 @@
+#!/bin/bash
+
+# .bash_options
+# based on https://github.com/necolas/dotfiles/blob/master/shell/bash_options
+
+# Autocorrect typos in path names when using `cd`
+shopt -s cdspell
+
+# Save all lines of a multiple-line command in the same history entry.
+shopt -s cmdhist
+
+# Check the window size after each command and, if necessary, update the values
+# of LINES and COLUMNS.
+shopt -s checkwinsize
+
+# Append to the Bash history file, rather than overwriting it
+shopt -s histappend
+
+# Case-insensitive globbing (used in pathname expansion)
+shopt -s nocaseglob
+
+# Don't check mail when opening terminal.
+unset MAILCHECK

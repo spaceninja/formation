@@ -1,0 +1,49 @@
+# .gitignore
+# based on https://github.com/alrra/dotfiles/blob/master/src/git/gitignore
+
+# Useful `.gitignore` templates:
+# https://github.com/github/gitignore
+
+# Linux ------------------------------------------------------------------------
+*~
+
+# MacOS ------------------------------------------------------------------------
+._*
+.AppleDouble
+.DS_Store
+.localized
+.LSOverride
+.Spotlight-V100
+.Trashes
+Icon
+
+# Windows ----------------------------------------------------------------------
+Desktop.ini
+ehthumbs.db
+Thumbs.db
+
+# Bower ------------------------------------------------------------------------
+bower_components
+
+# Node -------------------------------------------------------------------------
+node_modules
+npm-debug.log
+
+# Vim --------------------------------------------------------------------------
+%*
+*.sw[a-z]
+*.un~
+.netrwhist
+Session.vim
+
+# Misc -------------------------------------------------------------------------
+# Always-ignore extensions
+*.diff
+*.err
+*.log
+*.orig
+*.pyc
+*.rej
+*.sass-cache
+*.sw?
+*.vi

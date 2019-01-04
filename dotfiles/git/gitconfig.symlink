@@ -1,0 +1,159 @@
+# .gitconfig
+# based on https://github.com/mathiasbynens/dotfiles/blob/master/.gitconfig
+# and https://github.com/alrra/dotfiles/blob/master/src/git/gitconfig
+
+[alias]
+    # https://git.wiki.kernel.org/articles/a/l/i/Aliases.html
+    a  = commit --amend
+    aa = add --all
+    br = branch
+    c  = commit
+    ca = commit -a
+	co = checkout
+    cp = cherry-pick
+    d  = diff
+    f  = fetch
+    p  = push
+    r  = rebase
+	st = status
+	s  = status -s
+
+	# List aliases
+	aliases = config --get-regexp alias
+
+    # `git remote prune origin`: remove remote-tracking branches that were deleted from the remote repo
+    # `git gc`: cleanup unnecessary files and optimize the local repository
+    # `git clean -df`: remove untracked files and directories from the working tree
+    # `git stash clear`: remove all stashed states
+    trim = !git remote prune origin && git gc
+    cleanup = !git clean -df && git stash clear
+
+	# Remove branches that have already been merged with master
+	# a.k.a. ‘delete merged’
+	dm = "!git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d"
+
+    # DIFF ---------------------------------------------------------------------
+    # Diff what is staged for the next commit
+    diffc = diff --cached
+    # Diff overview
+    diffst = diff --stat
+    # Diff So Fancy
+    dsf = "!f() { [ -z \"$GIT_PREFIX\" ] || cd \"$GIT_PREFIX\" && git diff --color \"$@\" | diff-so-fancy  | less --tabs=4 -RFX; }; f"
+
+    # Custom graph log (append any tree-ish)
+    graph = log --pretty=nice --date-order --graph
+    # Custom graph log for all branches
+    grapha = log --pretty=nice --date-order --graph --all
+
+    # LOGS ---------------------------------------------------------------------
+	# View abbreviated SHA, description, and history graph of the latest 20 commits
+	l = log --pretty=oneline -n 20 --graph --abbrev-commit
+    # Most Recent Commit
+	last = log -1 HEAD
+    # show just the commits on this branch
+    lb = log master..
+    lbo = log master.. --oneline
+    # List contributors
+    lc  = shortlog --email --numbered --summary
+    # One-line log
+    lg = log --oneline
+    # Custom pretty log
+    logp = log --pretty=nice --date-order
+    # Diffstat log
+    logst = log --stat
+    # Short format diffstat log
+    logsf = log --stat --format=oneline --abbrev-commit
+
+    # better pull requests
+    # ref: https://davidwalsh.name/pull-down-pr
+	pr = "!f() { git fetch -fu ${2:-upstream} refs/pull/$1/head:pr/$1 && git checkout pr/$1; }; f"
+	pr-clean = "!git checkout master ; git for-each-ref refs/heads/pr/* --format=\"%(refname)\" | while read ref ; do branch=${ref#refs/heads/} ; git branch -D $branch ; done"
+    # Fetch and checkout a GitHub Pull Request from a remote (defaults to `origin`)
+    # Use: `git gh-pr 123` or `git gh-pr 123 upstream`
+    gh-pr = !bash -c 'git fetch -fu ${2:-origin} refs/pull/$1/head:gh-pr/$1 && git checkout gh-pr/$1' -
+
+    # Amend commit without editing
+    recommit = commit --amend --no-edit
+
+    # Remove all staged files
+	unstage = reset HEAD --
+
+    # Find out who is currently active on the repository
+    # Displays committers in descending order of number of commits
+    who = shortlog --numbered --summary --email --no-merges --since="3 months"
+
+[color]
+	# Use colors in Git commands that are capable of colored output when
+	# outputting to the terminal. (This is the default setting in Git ≥ 1.8.4.)
+    interactive = auto
+    ui = auto
+
+[commit]
+    # commit template: https://gist.github.com/adeekshith/cd4c95a064977cdc6c50
+    template = ~/.gitmessage
+
+[core]
+    # Use custom `.gitignore` and `.gitattributes`
+    attributesfile = ~/.gitattributes
+    excludesfile = ~/.gitignore
+
+[credential]
+    helper = osxkeychain
+
+[diff]
+    # Show blocks of moved text of at least 20
+    # alphanumeric characters differently than adds/deletes.
+    # https://git-scm.com/docs/git-diff#git-diff-zebra
+    colorMoved = zebra
+
+[difftool]
+	prompt = false
+
+[fetch]
+    prune = true
+
+[help]
+	# Automatically correct and execute mistyped commands
+	autocorrect = 1
+
+[merge]
+	# Include summaries of merged commits in newly created merge commit messages
+	log = true
+
+[mergetool]
+    prompt = false
+
+[pretty]
+    # tut: http://gitimmersion.com/lab_10.html
+    # ref: http://linux.die.net/man/1/git-log
+    # Result: <short-sha> <commit-message> (<pointer-names>) -- <commit-author-name>; <relative-time>
+    nice = "%C(magenta)%h%C(red)%d %C(yellow)%ar %C(green)%s %C(reset)(%an)"
+    #                   │        │            │            │            └─ author name
+    #                   │        │            │            └─ message
+    #                   │        │            └─ date (relative)
+    #                   │        └─ decorations (branch, heads or tags)
+    #                   └─ hash (abbreviated)
+
+[push]
+    # https://git-scm.com/docs/git-config#git-config-pushdefault
+	default = simple
+
+[user]
+    # Do not guess the user's identity.
+    # https://github.com/git/git/blob/90f7b16b3adc78d4bbabbd426fb69aa78c714f71/Documentation/config.txt#L2847-L2855
+    useConfigOnly = true
+
+    # [!] DO NOT store sensitive information such as the Git user
+    # credentials (`name` / `email`), or things such as the `signingkey`
+    # in this file, add them in `~/.gitconfig.local`!
+    #
+    # See also: https://github.com/alrra/dotfiles#gitconfiglocal
+
+[include]
+    # Load local configs.
+    # https://git-scm.com/docs/git-config#_includes
+    #
+    # [!] The following needs to remain at the end of this file in
+    #     order to allow any of the above configs to be overwritten
+    #     by the local ones
+    path = ~/.gitconfig.local

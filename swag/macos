@@ -1,0 +1,128 @@
+#!/usr/bin/env bash
+
+# ~/.macos — https://mths.be/macos
+
+# Close any open System Preferences panes, to prevent them from overriding
+# settings we’re about to change
+osascript -e 'tell application "System Preferences" to quit'
+
+# Desktop
+# ----------------------------------------------------------------------
+
+# Enable snap-to-grid for desktop icons
+/usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plist
+
+# Show icons for hard drives, servers, and removable media on the desktop
+defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool true
+defaults write com.apple.finder ShowMountedServersOnDesktop -bool true
+defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool true
+
+# Dock
+# ----------------------------------------------------------------------
+
+# Enable highlight hover effect for the grid view of a stack (Dock)
+defaults write com.apple.dock mouse-over-hilite-stack -bool true
+
+# Change minimize/maximize window effect
+defaults write com.apple.dock mineffect -string "scale"
+
+# Don’t animate opening applications from the Dock
+defaults write com.apple.dock launchanim -bool false
+
+# Automatically hide and show the Dock
+defaults write com.apple.dock autohide -bool true
+
+# Show indicator lights for open applications in the Dock
+defaults write com.apple.dock show-process-indicators -bool true
+
+# Don’t show recent applications in Dock
+defaults write com.apple.dock show-recents -bool false
+
+
+# Finder
+# ----------------------------------------------------------------------
+
+# Finder: hide hidden files by default
+defaults write com.apple.finder AppleShowAllFiles -bool false
+
+# Finder: show all filename extensions
+defaults write NSGlobalDomain AppleShowAllExtensions -bool true
+
+# Finder: empty Trash securely by default
+defaults write com.apple.finder EmptyTrashSecurely -bool true
+
+# Finder: show status bar
+defaults write com.apple.finder ShowStatusBar -bool true
+
+# Finder: use column view in all windows by default
+defaults write com.apple.finder FXPreferredViewStyle -string "clmv"
+
+
+# Panels
+# ----------------------------------------------------------------------
+
+# Panels: expand save panel by default
+defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
+
+# Panels: expand print panel by default
+defaults write NSGlobalDomain PMPrintingExpandedStateForPrint -bool true
+
+# Automatically quit printer app once the print jobs complete
+defaults write com.apple.print.PrintingPrefs "Quit When Finished" -bool true
+
+# Panels: enable full keyboard access for all controls (e.g. enable Tab in modal dialogs)
+defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
+
+
+# Screen
+# ----------------------------------------------------------------------
+
+# Screen: save screenshots to the desktop
+defaults write com.apple.screencapture location -string "$HOME/Desktop"
+
+# Save screenshots in PNG format (other options: BMP, GIF, JPG, PDF, TIFF)
+defaults write com.apple.screencapture type -string "png"
+
+# Screen: disable shadow in screenshots
+defaults write com.apple.screencapture disable-shadow -bool true
+
+# Hot corners
+# Possible values:
+#  0: no-op
+#  2: Mission Control
+#  3: Show application windows
+#  4: Desktop
+#  5: Start screen saver
+#  6: Disable screen saver
+#  7: Dashboard
+# 10: Put display to sleep
+# 11: Launchpad
+# 12: Notification Center
+# Bottom left screen corner → Start screen saver
+defaults write com.apple.dock wvous-bl-corner -int 5
+defaults write com.apple.dock wvous-bl-modifier -int 0
+# Bottom right screen corner → Put display to sleep
+defaults write com.apple.dock wvous-tr-corner -int 10
+defaults write com.apple.dock wvous-tr-modifier -int 0
+
+
+# Disks
+# ----------------------------------------------------------------------
+
+# Disks: avoid creating .DS_Store files on network volumes
+defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
+defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
+
+# Disks: disable Time Machine prompts
+defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
+
+
+# Misc
+# ----------------------------------------------------------------------
+
+# Prevent Image Capture from opening automatically when devices are plugged in
+defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool true
+
+# Add iOS & Watch Simulator to Launchpad
+sudo ln -sf "/Applications/Xcode.app/Contents/Developer/Applications/Simulator.app" "/Applications/Simulator.app"
+sudo ln -sf "/Applications/Xcode.app/Contents/Developer/Applications/Simulator (Watch).app" "/Applications/Simulator (Watch).app"

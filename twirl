@@ -23,7 +23,7 @@ indent="   "
 # Get full directory name of this script
 cwd="$(cd "$(dirname "$0")" && pwd)"
 
-DOTFILES_ROOT=$HOME/.dotfiles
+DOTFILES_ROOT=$cwd/dotfiles
 
 ###############################################################################
 # Utility Functions
@@ -460,7 +460,7 @@ ask() {
         fi
 
         # Ask the question (not using "read -p" as it uses stderr not stdout)
-        echo -n "  [?] $1 [$prompt] "
+        echo "  [?] $1 [$prompt] "
 
         # Read the answer (use /dev/tty in case stdin is redirected from somewhere else)
         read reply </dev/tty
@@ -480,7 +480,7 @@ ask() {
 }
 
 ###############################################################################
-# 
+#
 ###############################################################################
 
 # return 1 if global command line program installed, else 0
