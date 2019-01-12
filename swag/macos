@@ -42,20 +42,11 @@ defaults write com.apple.dock show-recents -bool false
 # Finder
 # ----------------------------------------------------------------------
 
-# Finder: hide hidden files by default
-defaults write com.apple.finder AppleShowAllFiles -bool false
-
-# Finder: show all filename extensions
-defaults write NSGlobalDomain AppleShowAllExtensions -bool true
-
 # Finder: empty Trash securely by default
 defaults write com.apple.finder EmptyTrashSecurely -bool true
 
 # Finder: show status bar
 defaults write com.apple.finder ShowStatusBar -bool true
-
-# Finder: use column view in all windows by default
-defaults write com.apple.finder FXPreferredViewStyle -string "clmv"
 
 
 # Panels
@@ -102,8 +93,8 @@ defaults write com.apple.screencapture disable-shadow -bool true
 defaults write com.apple.dock wvous-bl-corner -int 5
 defaults write com.apple.dock wvous-bl-modifier -int 0
 # Bottom right screen corner → Put display to sleep
-defaults write com.apple.dock wvous-tr-corner -int 10
-defaults write com.apple.dock wvous-tr-modifier -int 0
+defaults write com.apple.dock wvous-br-corner -int 10
+defaults write com.apple.dock wvous-br-modifier -int 0
 
 
 # Disks
@@ -125,4 +116,3 @@ defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool true
 
 # Add iOS & Watch Simulator to Launchpad
 sudo ln -sf "/Applications/Xcode.app/Contents/Developer/Applications/Simulator.app" "/Applications/Simulator.app"
-sudo ln -sf "/Applications/Xcode.app/Contents/Developer/Applications/Simulator (Watch).app" "/Applications/Simulator (Watch).app"
