@@ -1,6 +1,7 @@
 git
 bash-completion
 mas
+nvm
 wget
 yarn
 rbenv
