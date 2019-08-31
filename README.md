@@ -1,4 +1,4 @@
-# 🐝 Formation
+# 🐝 Formation <a href="https://www.patreon.com/minamarkham"><img src="https://c5.patreon.com/external/logo/become_a_patron_button@2x.png" width="100"></a>
 
 ![Let's get in formation](assets/formation.gif)
 
@@ -23,7 +23,8 @@ less slay
 Slay:
 
 ```sh
-sh slay 2>&1 | tee ~/slay.log
+cd formation
+./slay 2>&1 | tee ~/slay.log
 ```
 
 Just follow the prompts and you’ll be fine. 👌
@@ -42,7 +43,7 @@ That's it! :sparkles:
 
 ## What it sets up
 
-The setup process will:
+The setup process will install:
 
 <details>
 <summary>Basic tools:</summary>
@@ -123,7 +124,6 @@ The setup process will:
 - [1Password](https://1password.com/) for password management.
 - [Dropbox](https://www.dropbox.com) for cloud file storage.
 - [Divvy](http://mizage.com/divvy/) for better window management.
-- [Dr Cleaner Pro Plus](https://www.drcleaner.com/)
 - [Encrypto](https://macpaw.com/encrypto) for securing files.
 - [ExpressVPN](https://www.expressvpn.com/) for privacy.
 - [HyperDock](https://bahoom.com/hyperdock/)
@@ -150,7 +150,7 @@ The setup process will:
 - [TorBrowser](https://www.torproject.org/projects/torbrowser.html.en) for super secret web browsing.
   </details>
 
-<sub>See [`.swag`](.swag) for the full list of apps that will be installed. Adjust it to your personal taste.</sub>
+<sub>See [`swag`](swag) for the full list of apps that will be installed. Adjust it to your personal taste.</sub>
 
 It should take less than 20 minutes to install (depends on your machine).
 
