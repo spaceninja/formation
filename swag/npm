@@ -1,5 +1,8 @@
 diff-so-fancy::diff-so-fancy
 eslint::eslint
+grunt-cli::grunt
+gulp-cli::gulp
 prettier::prettier
 stylelint::stylelint
+vue-cli::vue
 yo::yo

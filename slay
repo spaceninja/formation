@@ -128,7 +128,7 @@ else
 	print_success_muted "Homebrew already installed. Skipping."
 fi
 
-if brew list | grep -Fq brew-cask; then
+if brew list --full-name | grep -Fq brew-cask; then
 	step "Uninstalling old Homebrew-Cask…"
 	brew uninstall --force brew-cask
 	print_success "Homebrew-Cask uninstalled!"
@@ -158,7 +158,7 @@ if [ -e $cwd/swag/casks ]; then
 	chapter "Installing apps via Homebrew…"
 
 	for cask in $(<$cwd/swag/casks); do
-	    install_application_via_brew $cask
+	  install_application_via_brew $cask
 	done
 fi
 
@@ -177,6 +177,25 @@ if [ -e $cwd/swag/fonts ]; then
 	fi
 
 	for cask in $(<$cwd/swag/fonts); do
+	    install_application_via_brew $cask
+	done
+fi
+
+###############################################################################
+# INSTALL: cask-drivers
+###############################################################################
+if [ -e $cwd/swag/drivers ]; then
+	chapter "Installing drivers via Homebrew…"
+
+	if ! brew tap | grep -q cask-drivers; then
+		echo_install "Installing cask-drivers"
+		brew tap homebrew/cask-drivers >/dev/null
+		print_in_green "${bold}✓ installed!${normal}\n"
+	else
+		print_success_muted "cask-drivers already installed. Skipped."
+	fi
+
+	for cask in $(<$cwd/swag/drivers); do
 	    install_application_via_brew $cask
 	done
 fi
