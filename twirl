@@ -512,14 +512,14 @@ github_key_check() {
 
 create_ssh_key() {
 	if ask "No SSH key found. Create one?" Y; then
-		ssh-keygen -t rsa; github_key_check;
+		ssh-keygen -t ed25519; github_key_check;
 	else
 		return 0;
 	fi
 }
 
 ssh_key_setup() {
-    local pub=$HOME/.ssh/id_rsa.pub
+    local pub=$HOME/.ssh/id_ed25519.pub
 
     if ! [[ -f $pub ]]; then
         create_ssh_key
