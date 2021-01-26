@@ -12,7 +12,7 @@ elif infocmp xterm-256color >/dev/null 2>&1; then
 fi
 
 # bash completion
-[ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
+[ -f ~/.gitcompletion.bash ] && . ~/.gitcompletion.bash
 
 # Load the shell dotfiles, and then some:
 # * ~/.path can be used to extend `$PATH`.

@@ -134,6 +134,10 @@
     #                   │        └─ decorations (branch, heads or tags)
     #                   └─ hash (abbreviated)
 
+[pull]
+    # https://github.com/git/git/commit/d18c950a69f3a24e1e3add3d9fc427641f53e12b
+	rebase = true
+
 [push]
     # https://git-scm.com/docs/git-config#git-config-pushdefault
 	default = simple
