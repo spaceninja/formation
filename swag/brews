@@ -2,6 +2,7 @@ bash-completion
 composer
 emacs
 git
+mas
 nvm
 wget
 yarn
