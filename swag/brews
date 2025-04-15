@@ -1,9 +1,13 @@
 bash-completion
 composer
+curl
 emacs
 ffmpeg
 git
 mas
+node
 nvm
+php
 wget
 yarn
+yt-dlp
