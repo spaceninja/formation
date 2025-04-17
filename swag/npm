@@ -4,5 +4,3 @@ grunt-cli::grunt
 gulp-cli::gulp
 prettier::prettier
 stylelint::stylelint
-vue-cli::vue
-yo::yo
