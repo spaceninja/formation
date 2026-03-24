@@ -1,0 +1,11 @@
+# PATH (from bash_paths, POSIX-compatible)
+for dir in /opt/homebrew/sbin /opt/homebrew/bin /usr/local/bin; do
+  [ -d "$dir" ] && PATH="$dir:$PATH"
+done
+for dir in /usr/bin "$HOME/bin" "$HOME/.dotfiles/bin" "$HOME/.rvm/bin" /opt/homebrew/libexec/gnubin /opt/homebrew/share/npm/bin; do
+  [ -d "$dir" ] && PATH="$PATH:$dir"
+done
+export PATH
+
+# Load local overrides (PATH additions, NVM, etc.)
+[ -f ~/.zprofile.local ] && source ~/.zprofile.local

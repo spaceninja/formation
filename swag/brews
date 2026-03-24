@@ -8,6 +8,7 @@ mas
 node
 nvm
 php
+starship
 wget
 yarn
 yt-dlp
